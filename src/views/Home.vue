@@ -1,13 +1,16 @@
 <template>
   <div class="home">
-    <div class="card" v-for="item in appareils" v-bind:key="item.id">
+    <div class="card" v-for="(item,index) in appareils" v-bind:key="item.id">
       <div class="card-body">
         <h5 class="card-title"> {{ item.name }} </h5>
         <div class="etat">
-          <span>Etat: {{ item.etat }} </span> 
-          <div >
-            <button class="btn btn-danger float-right" > Eteindre </button>
-            <button class="btn btn-success float-right" > Allumer </button>
+          <div>
+            <span class="titre">Etat: </span>
+            <span :class=" item.etat == 'Eteint'?'etatRed':'etatGreen'" > {{ item.etat }} </span>
+          </div>
+          <div>
+            <button class="btn btn-danger float-right" @click="onChangeEtat(index,false)" :disabled="item.etat == 'Eteint'" > Eteindre </button>
+            <button class="btn btn-success float-right" @click="onChangeEtat(index,true)" :disabled="item.etat == 'Allumé'" > Allumer </button>
           </div>
         </div>
         <div class="card-text">
@@ -18,33 +21,30 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-
-@Options({
-  components: {
-  },
+<script>
+export default {
   data: () => {
     return {
       appareils:[
         {
-          name: 'Machine à lavé',
-          etat: 'allumé',
+          name: 'Machine à laver',
+          etat: 'Allumé',
           description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
           
         },
         {
           name: 'Fer à repasser',
-          etat: 'allumé',
+          etat: 'Allumé',
           description: 'Architecto aspernatur earum ducimus deleniti, ipsum voluptatum'
         }
       ]
     }
+  },
+  methods:{
+    onChangeEtat(id,etat){
+      this.appareils[id].etat = etat == true? 'Allumé':'Eteint'
+    }
   }
-})
-
-export default class Home extends Vue {
-
 }
 </script>
 
@@ -63,5 +63,11 @@ export default class Home extends Vue {
   }
   .card {
     margin-bottom: 1rem;
+  }
+  .etatGreen {
+    color: green;
+  }
+  .etatRed {
+    color: red
   }
 </style>

@@ -5,7 +5,7 @@
       <NavLink/>
     </div>
     <div class="body">
-      <router-view/>
+      <router-view />
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@ import Header from "./views/Header.vue"
     components: {
     NavLink,
     Header
-  },
+    }
   }
 </script>
 
@@ -29,7 +29,8 @@ import Header from "./views/Header.vue"
     justify-content: space-around;
   }
   .body {
-    max-width: 80%;
     margin: auto;
+    width: 50%;
+    margin-top: 2rem;
   }
 </style>

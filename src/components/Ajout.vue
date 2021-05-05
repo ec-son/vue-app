@@ -1,9 +1,12 @@
 <template>
   <form>
-    <div class="form-group">
-      <label for="name">Ajouter un appareil: </label>
-      <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="nom de l'appareil" v-model="newAppareil.name">
-      <small id="helpId" class="form-text text-muted">Precisez bien le nom.</small>
+    <div class="form-group row">
+      <label for="name" class="col-form-label col-sm-4">Ajouter un appareil: </label>
+      <input type="text" class="form-control col-sm-8" name="name" id="name" placeholder="nom de l'appareil" v-model="newAppareil.name">
+    </div>
+    <div class="form-group row">
+      <label for="desc" class="col-sm-4 col-form-label"> Description </label>
+      <textarea class="form-control col-sm-8" name="desc" id="desc" rows="3" v-model="newAppareil.description"></textarea>
     </div>
     <div class="form-check">
       <label class="form-check-label">
@@ -12,29 +15,30 @@
       </label>
     </div>
     <div>
-      <button class="btn btn-success float-right" :disabled = "newAppareil.name == ''"> Valider </button>
+      <button type="button" class="btn btn-success float-right" :disabled = "newAppareil.name == ''" @click="onSubmit()"> Valider </button>
     </div>
-</form> 
+  </form> 
 </template>
 
 <script>
-import { Options, Vue } from 'vue-class-component';
 export default {
-    data: () => {
-      return {
-        newAppareil: {
-        etat: true,
-        name: ''
-      }
-      }
+  data: () => {
+    return {
+      newAppareil: {
+      etat: true,
+      name: '',
+      description: ''
     }
+    }
+  },
+  methods:{
+    onSubmit(){
+      console.log(this.newAppareil);
+    }
+  }
 }
 </script>
 
 <style lang = "scss" scoped>
-    form {
-        /* width: 50%; */
-        /* margin: auto; */
-        margin-top: 2rem;
-    }
+
 </style>
